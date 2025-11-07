@@ -1,0 +1,5 @@
+sample	condition	bam
+01_sictrl-rep1_S1	ctrl	/projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/align/bam/size_1_100bp/01_sictrl-rep1_S1_frag1_100.bam
+03_siCtrl-rep_2_S3	ctrl	/projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/align/bam/size_1_100bp/03_siCtrl-rep_2_S3_frag1_100.bam
+02_siP3-rep1_S2	siP3	/projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/align/bam/size_1_100bp/02_siP3-rep1_S2_frag1_100.bam
+04_siP3-rep_2_S4	siP3	/projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/align/bam/size_1_100bp/04_siP3-rep_2_S4_frag1_100.bam
