@@ -1,5 +1,5 @@
 # Telomeric ATAC-seq Analysis
-Replicated pipeline from Lynskey ML et al. Cell Reports (2024) STAR methods descriptions. Performs standard ATAC-seq analysis and telomeric specific analysis starting from raw fastq read files.
+Replicated pipeline from Lynskey ML et al. Cell Reports (2024) STAR methods descriptions. Written in collaboration with the NIH and Day Lab. Performs standard ATAC-seq analysis and telomeric specific analysis starting from raw fastq read files.
 
 ## Requirements
   - python=3.10
