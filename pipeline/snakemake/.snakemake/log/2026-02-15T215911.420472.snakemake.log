@@ -1,0 +1,28 @@
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 50
+Job stats:
+job                               count
+------------------------------  -------
+all                                   1
+compute_matrix_reference_point        8
+export_control_sorted_regions         4
+filter_regions_blacklist              4
+make_panel_png                        4
+plot_heatmap_sorted                   8
+plot_profile_ctrl_vs_treatment        4
+sort_matrix_to_control                8
+total                                41
+
+Select jobs to execute...
+InputFunctionException in rule filter_regions_blacklist in file /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/pipeline/snakemake/snakefile_atacseq.py, line 112:
+Error:
+  WorkflowError:
+    Failed to evaluate default resources value '00:30:00'.
+        String arguments may need additional quoting. Ex: --default-resources "tmpdir='/home/user/tmp'".
+    SyntaxError: invalid syntax (<string>, line 1)
+Wildcards:
+  region=HA-PARP3_HA_HQ
+Traceback:
+

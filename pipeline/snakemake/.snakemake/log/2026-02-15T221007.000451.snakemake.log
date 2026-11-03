@@ -1,0 +1,527 @@
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 50
+Job stats:
+job                               count
+------------------------------  -------
+all                                   1
+make_panel_png                        4
+plot_profile_ctrl_vs_treatment        4
+total                                 9
+
+Select jobs to execute...
+Failed to solve scheduling problem with ILP solver. Falling back to greedy solver. Run Snakemake with --verbose to see the full solver output for debugging the problem.
+
+[Sun Feb 15 22:10:08 2026]
+rule plot_profile_ctrl_vs_treatment:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/HA-PARP3_H3K4me3_HQ.noBlacklist.bed, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf
+    jobid: 35
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf
+    wildcards: region=HA-PARP3_H3K4me3_HQ
+    threads: 8
+    resources: mem_mb=16000, mem_mib=15259, disk_mb=1184, disk_mib=1130, tmpdir=<TBD>, time=02:00:00
+
+
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz)
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf)
+        computeMatrix reference-point \
+          --referencePoint center \
+          -b 2000 -a 2000 -bs 20 \
+          --missingDataAsZero \
+          -R /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/HA-PARP3_H3K4me3_HQ.noBlacklist.bed \
+          -S /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw \
+          --numberOfProcessors 8 \
+          -o /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz
+
+        plotProfile \
+          -m /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz \
+          -out /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf \
+          --perGroup \
+          --plotType lines \
+          --refPointLabel "HA-PARP3_H3K4me3_HQ center" \
+          --startLabel "-2 kb" --endLabel "+2 kb" \
+          --samplesLabel "ctrl" "siP3" \
+          --yAxisLabel "Mean RPGC signal" \
+          --dpi 300
+        
+Submitted job 35 with external jobid 'Submitted batch job 4384703'.
+
+[Sun Feb 15 22:10:08 2026]
+rule plot_profile_ctrl_vs_treatment:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/HA-PARP3_HA_HQ.noBlacklist.bed, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf
+    jobid: 36
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf
+    wildcards: region=HA-PARP3_HA_HQ
+    threads: 8
+    resources: mem_mb=16000, mem_mib=15259, disk_mb=1180, disk_mib=1126, tmpdir=<TBD>, time=02:00:00
+
+
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz)
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf)
+        computeMatrix reference-point \
+          --referencePoint center \
+          -b 2000 -a 2000 -bs 20 \
+          --missingDataAsZero \
+          -R /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/HA-PARP3_HA_HQ.noBlacklist.bed \
+          -S /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw \
+          --numberOfProcessors 8 \
+          -o /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz
+
+        plotProfile \
+          -m /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz \
+          -out /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf \
+          --perGroup \
+          --plotType lines \
+          --refPointLabel "HA-PARP3_HA_HQ center" \
+          --startLabel "-2 kb" --endLabel "+2 kb" \
+          --samplesLabel "ctrl" "siP3" \
+          --yAxisLabel "Mean RPGC signal" \
+          --dpi 300
+        
+Submitted job 36 with external jobid 'Submitted batch job 4384704'.
+
+[Sun Feb 15 22:10:08 2026]
+rule plot_profile_ctrl_vs_treatment:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/HA-PARP3_specific.noBlacklist.bed, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_specific/ctrl_vs_siP3.center2kb.bs20.matrix.gz, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf
+    jobid: 37
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf
+    wildcards: region=HA-PARP3_specific
+    threads: 8
+    resources: mem_mb=16000, mem_mib=15259, disk_mb=1180, disk_mib=1126, tmpdir=<TBD>, time=02:00:00
+
+
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_specific/ctrl_vs_siP3.center2kb.bs20.matrix.gz)
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf)
+        computeMatrix reference-point \
+          --referencePoint center \
+          -b 2000 -a 2000 -bs 20 \
+          --missingDataAsZero \
+          -R /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/HA-PARP3_specific.noBlacklist.bed \
+          -S /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw \
+          --numberOfProcessors 8 \
+          -o /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_specific/ctrl_vs_siP3.center2kb.bs20.matrix.gz
+
+        plotProfile \
+          -m /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/HA-PARP3_specific/ctrl_vs_siP3.center2kb.bs20.matrix.gz \
+          -out /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf \
+          --perGroup \
+          --plotType lines \
+          --refPointLabel "HA-PARP3_specific center" \
+          --startLabel "-2 kb" --endLabel "+2 kb" \
+          --samplesLabel "ctrl" "siP3" \
+          --yAxisLabel "Mean RPGC signal" \
+          --dpi 300
+        
+Submitted job 37 with external jobid 'Submitted batch job 4384705'.
+
+[Sun Feb 15 22:10:09 2026]
+rule plot_profile_ctrl_vs_treatment:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/U2OS_HA_HQ.noBlacklist.bed, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/U2OS_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf
+    jobid: 38
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf
+    wildcards: region=U2OS_HA_HQ
+    threads: 8
+    resources: mem_mb=16000, mem_mib=15259, disk_mb=1180, disk_mib=1126, tmpdir=<TBD>, time=02:00:00
+
+
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/U2OS_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz)
+        mkdir -p $(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf)
+        computeMatrix reference-point \
+          --referencePoint center \
+          -b 2000 -a 2000 -bs 20 \
+          --missingDataAsZero \
+          -R /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/regions_filtered/U2OS_HA_HQ.noBlacklist.bed \
+          -S /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.bw \
+          --numberOfProcessors 8 \
+          -o /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/U2OS_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz
+
+        plotProfile \
+          -m /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/matrices/U2OS_HA_HQ/ctrl_vs_siP3.center2kb.bs20.matrix.gz \
+          -out /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf \
+          --perGroup \
+          --plotType lines \
+          --refPointLabel "U2OS_HA_HQ center" \
+          --startLabel "-2 kb" --endLabel "+2 kb" \
+          --samplesLabel "ctrl" "siP3" \
+          --yAxisLabel "Mean RPGC signal" \
+          --dpi 300
+        
+Submitted job 38 with external jobid 'Submitted batch job 4384706'.
+Waiting at most 120 seconds for missing files.
+[Sun Feb 15 22:11:08 2026]
+Finished job 36.
+1 of 9 steps (11%) done
+Select jobs to execute...
+
+[Sun Feb 15 22:11:08 2026]
+rule make_panel_png:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png
+    jobid: 40
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png; Input files updated by another job: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf
+    wildcards: region=HA-PARP3_HA_HQ
+    resources: mem_mb=8000, mem_mib=7630, disk_mb=1000, disk_mib=954, tmpdir=<TBD>, time=01:00:00
+
+
+        outdir=$(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png)
+        mkdir -p "$outdir"
+
+        # render PDFs -> PNG (pdftocairo writes <prefix>.png)
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf "$outdir/profile"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_ctrl"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_siP3"
+
+        export OUTDIR_PLOT="$outdir"
+        export REGION="HA-PARP3_HA_HQ"
+        export OUTNAME="$(basename /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png)"
+        export CTRL="ctrl"
+        export TRT="siP3"
+
+        python - <<'PY'
+from PIL import Image
+import os
+
+outdir = os.environ["OUTDIR_PLOT"]
+outname = os.environ["OUTNAME"]
+ctrl = os.environ["CTRL"]
+trt  = os.environ["TRT"]
+
+profile = Image.open(os.path.join(outdir, "profile.png")).convert("RGBA")
+
+hm_ctrl_path = os.path.join(outdir, "heatmap_" + ctrl + ".png")
+hm_trt_path  = os.path.join(outdir, "heatmap_" + trt  + ".png")
+
+hm_ctrl = Image.open(hm_ctrl_path).convert("RGBA")
+hm_trt  = Image.open(hm_trt_path).convert("RGBA")
+
+# make heatmaps same height
+H = max(hm_ctrl.height, hm_trt.height)
+def pad_to_height(im, H):
+    if im.height == H:
+        return im
+    canvas = Image.new("RGBA", (im.width, H), (255,255,255,255))
+    canvas.paste(im, (0, (H - im.height)//2))
+    return canvas
+
+hm_ctrl = pad_to_height(hm_ctrl, H)
+hm_trt  = pad_to_height(hm_trt, H)
+
+heat_row = Image.new("RGBA", (hm_ctrl.width + hm_trt.width, H), (255,255,255,255))
+heat_row.paste(hm_ctrl, (0,0))
+heat_row.paste(hm_trt, (hm_ctrl.width, 0))
+
+# match widths
+W = max(profile.width, heat_row.width)
+def pad_to_width(im, W):
+    if im.width == W:
+        return im
+    canvas = Image.new("RGBA", (W, im.height), (255,255,255,255))
+    canvas.paste(im, ((W - im.width)//2, 0))
+    return canvas
+
+profile  = pad_to_width(profile, W)
+heat_row = pad_to_width(heat_row, W)
+
+panel = Image.new("RGBA", (W, profile.height + heat_row.height), (255,255,255,255))
+panel.paste(profile, (0,0))
+panel.paste(heat_row, (0, profile.height))
+
+out = os.path.join(outdir, outname)
+panel.convert("RGB").save(out, "PNG")
+print("WROTE", out)
+PY
+
+        ls -lh /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png
+        
+Submitted job 40 with external jobid 'Submitted batch job 4384713'.
+[Sun Feb 15 22:11:08 2026]
+Finished job 37.
+2 of 9 steps (22%) done
+[Sun Feb 15 22:11:08 2026]
+Finished job 38.
+3 of 9 steps (33%) done
+Select jobs to execute...
+Failed to solve scheduling problem with ILP solver. Falling back to greedy solver. Run Snakemake with --verbose to see the full solver output for debugging the problem.
+
+[Sun Feb 15 22:11:08 2026]
+rule make_panel_png:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_specific.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_specific.center2kb.bs20.sortedToControl.heatmap.pdf
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png
+    jobid: 41
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png; Input files updated by another job: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf
+    wildcards: region=HA-PARP3_specific
+    resources: mem_mb=8000, mem_mib=7630, disk_mb=1000, disk_mib=954, tmpdir=<TBD>, time=01:00:00
+
+
+        outdir=$(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png)
+        mkdir -p "$outdir"
+
+        # render PDFs -> PNG (pdftocairo writes <prefix>.png)
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf "$outdir/profile"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_specific.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_ctrl"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_specific.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_siP3"
+
+        export OUTDIR_PLOT="$outdir"
+        export REGION="HA-PARP3_specific"
+        export OUTNAME="$(basename /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png)"
+        export CTRL="ctrl"
+        export TRT="siP3"
+
+        python - <<'PY'
+from PIL import Image
+import os
+
+outdir = os.environ["OUTDIR_PLOT"]
+outname = os.environ["OUTNAME"]
+ctrl = os.environ["CTRL"]
+trt  = os.environ["TRT"]
+
+profile = Image.open(os.path.join(outdir, "profile.png")).convert("RGBA")
+
+hm_ctrl_path = os.path.join(outdir, "heatmap_" + ctrl + ".png")
+hm_trt_path  = os.path.join(outdir, "heatmap_" + trt  + ".png")
+
+hm_ctrl = Image.open(hm_ctrl_path).convert("RGBA")
+hm_trt  = Image.open(hm_trt_path).convert("RGBA")
+
+# make heatmaps same height
+H = max(hm_ctrl.height, hm_trt.height)
+def pad_to_height(im, H):
+    if im.height == H:
+        return im
+    canvas = Image.new("RGBA", (im.width, H), (255,255,255,255))
+    canvas.paste(im, (0, (H - im.height)//2))
+    return canvas
+
+hm_ctrl = pad_to_height(hm_ctrl, H)
+hm_trt  = pad_to_height(hm_trt, H)
+
+heat_row = Image.new("RGBA", (hm_ctrl.width + hm_trt.width, H), (255,255,255,255))
+heat_row.paste(hm_ctrl, (0,0))
+heat_row.paste(hm_trt, (hm_ctrl.width, 0))
+
+# match widths
+W = max(profile.width, heat_row.width)
+def pad_to_width(im, W):
+    if im.width == W:
+        return im
+    canvas = Image.new("RGBA", (W, im.height), (255,255,255,255))
+    canvas.paste(im, ((W - im.width)//2, 0))
+    return canvas
+
+profile  = pad_to_width(profile, W)
+heat_row = pad_to_width(heat_row, W)
+
+panel = Image.new("RGBA", (W, profile.height + heat_row.height), (255,255,255,255))
+panel.paste(profile, (0,0))
+panel.paste(heat_row, (0, profile.height))
+
+out = os.path.join(outdir, outname)
+panel.convert("RGB").save(out, "PNG")
+print("WROTE", out)
+PY
+
+        ls -lh /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png
+        
+Submitted job 41 with external jobid 'Submitted batch job 4384714'.
+
+[Sun Feb 15 22:11:08 2026]
+rule make_panel_png:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.U2OS_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.U2OS_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png
+    jobid: 42
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png; Input files updated by another job: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf
+    wildcards: region=U2OS_HA_HQ
+    resources: mem_mb=8000, mem_mib=7630, disk_mb=1000, disk_mib=954, tmpdir=<TBD>, time=01:00:00
+
+
+        outdir=$(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png)
+        mkdir -p "$outdir"
+
+        # render PDFs -> PNG (pdftocairo writes <prefix>.png)
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf "$outdir/profile"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.U2OS_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_ctrl"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.U2OS_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_siP3"
+
+        export OUTDIR_PLOT="$outdir"
+        export REGION="U2OS_HA_HQ"
+        export OUTNAME="$(basename /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png)"
+        export CTRL="ctrl"
+        export TRT="siP3"
+
+        python - <<'PY'
+from PIL import Image
+import os
+
+outdir = os.environ["OUTDIR_PLOT"]
+outname = os.environ["OUTNAME"]
+ctrl = os.environ["CTRL"]
+trt  = os.environ["TRT"]
+
+profile = Image.open(os.path.join(outdir, "profile.png")).convert("RGBA")
+
+hm_ctrl_path = os.path.join(outdir, "heatmap_" + ctrl + ".png")
+hm_trt_path  = os.path.join(outdir, "heatmap_" + trt  + ".png")
+
+hm_ctrl = Image.open(hm_ctrl_path).convert("RGBA")
+hm_trt  = Image.open(hm_trt_path).convert("RGBA")
+
+# make heatmaps same height
+H = max(hm_ctrl.height, hm_trt.height)
+def pad_to_height(im, H):
+    if im.height == H:
+        return im
+    canvas = Image.new("RGBA", (im.width, H), (255,255,255,255))
+    canvas.paste(im, (0, (H - im.height)//2))
+    return canvas
+
+hm_ctrl = pad_to_height(hm_ctrl, H)
+hm_trt  = pad_to_height(hm_trt, H)
+
+heat_row = Image.new("RGBA", (hm_ctrl.width + hm_trt.width, H), (255,255,255,255))
+heat_row.paste(hm_ctrl, (0,0))
+heat_row.paste(hm_trt, (hm_ctrl.width, 0))
+
+# match widths
+W = max(profile.width, heat_row.width)
+def pad_to_width(im, W):
+    if im.width == W:
+        return im
+    canvas = Image.new("RGBA", (W, im.height), (255,255,255,255))
+    canvas.paste(im, ((W - im.width)//2, 0))
+    return canvas
+
+profile  = pad_to_width(profile, W)
+heat_row = pad_to_width(heat_row, W)
+
+panel = Image.new("RGBA", (W, profile.height + heat_row.height), (255,255,255,255))
+panel.paste(profile, (0,0))
+panel.paste(heat_row, (0, profile.height))
+
+out = os.path.join(outdir, outname)
+panel.convert("RGB").save(out, "PNG")
+print("WROTE", out)
+PY
+
+        ls -lh /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png
+        
+Submitted job 42 with external jobid 'Submitted batch job 4384715'.
+Waiting at most 120 seconds for missing files.
+[Sun Feb 15 22:11:38 2026]
+Finished job 40.
+4 of 9 steps (44%) done
+Waiting at most 120 seconds for missing files.
+[Sun Feb 15 22:11:39 2026]
+Finished job 41.
+5 of 9 steps (56%) done
+[Sun Feb 15 22:11:39 2026]
+Finished job 42.
+6 of 9 steps (67%) done
+[Sun Feb 15 22:12:19 2026]
+Finished job 35.
+7 of 9 steps (78%) done
+Select jobs to execute...
+
+[Sun Feb 15 22:12:19 2026]
+rule make_panel_png:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_H3K4me3_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_H3K4me3_HQ.center2kb.bs20.sortedToControl.heatmap.pdf
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png
+    jobid: 39
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png; Input files updated by another job: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf
+    wildcards: region=HA-PARP3_H3K4me3_HQ
+    resources: mem_mb=8000, mem_mib=7630, disk_mb=1000, disk_mib=954, tmpdir=<TBD>, time=01:00:00
+
+
+        outdir=$(dirname /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png)
+        mkdir -p "$outdir"
+
+        # render PDFs -> PNG (pdftocairo writes <prefix>.png)
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf "$outdir/profile"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_H3K4me3_HQ.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_ctrl"
+        pdftocairo -png -singlefile /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_H3K4me3_HQ.center2kb.bs20.sortedToControl.heatmap.pdf   "$outdir/heatmap_siP3"
+
+        export OUTDIR_PLOT="$outdir"
+        export REGION="HA-PARP3_H3K4me3_HQ"
+        export OUTNAME="$(basename /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png)"
+        export CTRL="ctrl"
+        export TRT="siP3"
+
+        python - <<'PY'
+from PIL import Image
+import os
+
+outdir = os.environ["OUTDIR_PLOT"]
+outname = os.environ["OUTNAME"]
+ctrl = os.environ["CTRL"]
+trt  = os.environ["TRT"]
+
+profile = Image.open(os.path.join(outdir, "profile.png")).convert("RGBA")
+
+hm_ctrl_path = os.path.join(outdir, "heatmap_" + ctrl + ".png")
+hm_trt_path  = os.path.join(outdir, "heatmap_" + trt  + ".png")
+
+hm_ctrl = Image.open(hm_ctrl_path).convert("RGBA")
+hm_trt  = Image.open(hm_trt_path).convert("RGBA")
+
+# make heatmaps same height
+H = max(hm_ctrl.height, hm_trt.height)
+def pad_to_height(im, H):
+    if im.height == H:
+        return im
+    canvas = Image.new("RGBA", (im.width, H), (255,255,255,255))
+    canvas.paste(im, (0, (H - im.height)//2))
+    return canvas
+
+hm_ctrl = pad_to_height(hm_ctrl, H)
+hm_trt  = pad_to_height(hm_trt, H)
+
+heat_row = Image.new("RGBA", (hm_ctrl.width + hm_trt.width, H), (255,255,255,255))
+heat_row.paste(hm_ctrl, (0,0))
+heat_row.paste(hm_trt, (hm_ctrl.width, 0))
+
+# match widths
+W = max(profile.width, heat_row.width)
+def pad_to_width(im, W):
+    if im.width == W:
+        return im
+    canvas = Image.new("RGBA", (W, im.height), (255,255,255,255))
+    canvas.paste(im, ((W - im.width)//2, 0))
+    return canvas
+
+profile  = pad_to_width(profile, W)
+heat_row = pad_to_width(heat_row, W)
+
+panel = Image.new("RGBA", (W, profile.height + heat_row.height), (255,255,255,255))
+panel.paste(profile, (0,0))
+panel.paste(heat_row, (0, profile.height))
+
+out = os.path.join(outdir, outname)
+panel.convert("RGB").save(out, "PNG")
+print("WROTE", out)
+PY
+
+        ls -lh /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png
+        
+Submitted job 39 with external jobid 'Submitted batch job 4384731'.
+Waiting at most 120 seconds for missing files.
+[Sun Feb 15 22:12:49 2026]
+Finished job 39.
+8 of 9 steps (89%) done
+Select jobs to execute...
+
+[Sun Feb 15 22:12:49 2026]
+localrule all:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_H3K4me3_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_specific.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.U2OS_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_H3K4me3_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.HA-PARP3_specific.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/siP3_hg38_frag1_100_merged.hg38.RPGC.bs1.U2OS_HA_HQ.center2kb.bs20.sortedToControl.heatmap.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png
+    jobid: 0
+    reason: Input files updated by another job: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/ctrl_vs_siP3.HA-PARP3_HA_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/U2OS_HA_HQ.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/U2OS_HA_HQ/ctrl_vs_siP3.U2OS_HA_HQ.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/HA-PARP3_specific.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_specific/ctrl_vs_siP3.HA-PARP3_specific.center2kb.profile.pdf, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/HA-PARP3_H3K4me3_HQ.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_HA_HQ/HA-PARP3_HA_HQ.center2kb_over_heatmaps.panel.png, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/heatmaps/HA-PARP3_H3K4me3_HQ/ctrl_vs_siP3.HA-PARP3_H3K4me3_HQ.center2kb.profile.pdf
+    resources: mem_mb=2000, mem_mib=1908, disk_mb=1000, disk_mib=954, tmpdir=/tmp
+
+[Sun Feb 15 22:12:49 2026]
+Finished job 0.
+9 of 9 steps (100%) done
+Complete log: .snakemake/log/2026-02-15T221007.000451.snakemake.log

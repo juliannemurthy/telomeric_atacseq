@@ -1,0 +1,75 @@
+# config.yaml
+# Julianne (Yulia) Murthy 
+
+proj: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere
+
+paths:
+  merge_dir: "{proj}/experiments/08_25_StrackerLab/merge"
+  bigwig_dir: "{proj}/experiments/08_25_StrackerLab/signal_bigwig_RPGC"
+  matrices_dir: "{proj}/experiments/08_25_StrackerLab/matrices"
+  heatmaps_dir: "{proj}/experiments/08_25_StrackerLab/heatmaps"
+  slurm_logs: "{proj}/experiments/08_25_StrackerLab/slurm_logs"
+
+refs:
+  hg38_blacklist: "{proj}/refs/hg38blacklist_ENCFF023CZC.bed"
+
+# Region sets to run (change)
+regions:
+  #HA-PARP3_H3K4me3_HQ:
+    #bed: "{proj}/refs/PARP3/HA-PARP3_H3K4me3_HQ.bed"
+    #label: "H3K4me3 peaks"
+  #HA-PARP3_HA_HQ:
+    #bed: "{proj}/refs/PARP3/HA-PARP3_HA_HQ.bed"
+    #label: "total HA-PARP3 peaks"
+  #HA-PARP3_specific:
+    #bed: "{proj}/refs/PARP3/HA-PARP3_specific.bed"
+    #label: "HA-PARP3 peaks (no parental overlap)"
+  #U2OS_HA_HQ:
+    #bed: "{proj}/refs/PARP3/U2OS_HA_HQ.bed"
+    #label: "parental peaks (non-specific HA)"
+  H3K4me3_G4pos:
+    bed: "{proj}/refs/PARP3/H3K4me3_G4pos.bed"
+    label: "H3K4me3 peaks (G4+)"
+  H3K4me3_G4neg:
+    bed: "{proj}/refs/PARP3/H3K4me3_G4neg.bed"
+    label: "H3K4me3 peaks (G4−)"
+
+# Effective genome size for hg38 (deepTools RPGC)
+effective_genome_size: 2913022398
+
+# Window/binning parameters 
+matrix_params:
+  reference_point: center
+  upstream: 2000
+  downstream: 2000
+  bin_size: 20
+  missing_data_as_zero: true
+
+plot_params:
+  color_map: RdBu
+  zmin: 0
+  zmax: 40
+  dpi: 200
+  heatmap_height: 12
+  heatmap_width: 6
+
+# Which sample is "control" (used to lock row order)
+# MUST match the sample prefix in the BAM filenames:
+# {sample}_hg38_frag1_100_merged.bam
+control_sample: ctrl
+treatment_sample: siP3
+
+# Resources (used by Snakemake threads/mem/time hints)
+resources:
+  bamcoverage:
+    threads: 8
+    mem_mb: 24000
+    time: "04:00:00"
+  compute_matrix:
+    threads: 8
+    mem_mb: 16000
+    time: "02:00:00"
+  plot:
+    threads: 2
+    mem_mb: 8000
+    time: "01:00:00"

@@ -1,0 +1,47 @@
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 50
+Job stats:
+job                               count
+------------------------------  -------
+all                                   1
+bamcoverage_rpgc                      2
+compute_matrix_reference_point        8
+export_control_sorted_regions         4
+filter_regions_blacklist              4
+make_panel_png                        4
+plot_heatmap_sorted                   8
+plot_profile_ctrl_vs_treatment        4
+sort_matrix_to_control                8
+total                                43
+
+Select jobs to execute...
+Failed to solve scheduling problem with ILP solver. Falling back to greedy solver. Run Snakemake with --verbose to see the full solver output for debugging the problem.
+
+[Sun Feb 15 20:54:58 2026]
+rule bamcoverage_rpgc:
+    input: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/merge/ctrl_hg38_frag1_100_merged.bam, /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/refs/hg38blacklist_ENCFF023CZC.bed
+    output: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw
+    jobid: 4
+    reason: Missing output files: /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw
+    wildcards: sample=ctrl
+    threads: 8
+    resources: mem_mb=24000, mem_mib=22889, disk_mb=3778, disk_mib=3603, tmpdir=<TBD>, time=04:00:00
+
+
+        mkdir -p /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC
+        bamCoverage \
+          --bam /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/merge/ctrl_hg38_frag1_100_merged.bam \
+          --outFileName /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/signal_bigwig_RPGC/ctrl_hg38_frag1_100_merged.hg38.RPGC.bs1.bw \
+          --outFileFormat bigwig \
+          --normalizeUsing RPGC \
+          --effectiveGenomeSize 2913022398 \
+          --ignoreDuplicates \
+          --binSize 1 \
+          --blackListFileName /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/refs/hg38blacklist_ENCFF023CZC.bed \
+          --numberOfProcessors 8
+        
+RuleException in rule bamcoverage_rpgc in file /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/pipeline/snakemake/snakefile_atacseq.py, line 131:
+NameError: The name 'jobscript' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}, when formatting the following:
+sbatch -p short -t {resources.time} --mem={resources.mem_mb} -c {threads} -J smk_{rule}   -o /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/slurm_logs/%x_%j.out   -e /projects/daylab/yulia/ATAC-Seq_T2T_Telomere/experiments/08_25_StrackerLab/slurm_logs/%x_%j.err   --wrap 'source /etc/profile.d/modules.sh; module load anaconda3; eval "$(conda shell.bash hook)"; conda activate atacseq_env; bash {jobscript}'
